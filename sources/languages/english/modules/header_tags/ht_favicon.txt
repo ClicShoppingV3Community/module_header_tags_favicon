@@ -1,0 +1,4 @@
+
+ module_header_tags_favicon_title = Do  you want use Favicon balise
+ module_header_tags_favicon_description = Add favicon balise in the store
+

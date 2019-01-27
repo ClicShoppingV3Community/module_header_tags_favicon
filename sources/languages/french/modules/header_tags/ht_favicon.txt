@@ -1,0 +1,3 @@
+module_header_tags_favicon_title = Souhaitez utiliser la balise Favicon pour afficher une petite image à cotè de l'URL ?
+module_header_tags_favicon_description = Ajouter une petite image en 64x64 à coté de l'URL
+
