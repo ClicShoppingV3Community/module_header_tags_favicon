@@ -1,19 +1,20 @@
 <?php
-/**
- *
- *  @copyright 2008 - https://www.clicshopping.org
- *  @Brand : ClicShopping(Tm) at Inpi all right Reserved
- *  @Licence GPL 2 & MIT
- *  @licence MIT - Portion of osCommerce 2.4
- *  @Info : https://www.clicshopping.org/forum/trademark/
- *
- */
+  /**
+   *
+   * @copyright 2008 - https://www.clicshopping.org
+   * @Brand : ClicShopping(Tm) at Inpi all right Reserved
+   * @Licence GPL 2 & MIT
+   * @licence MIT - Portion of osCommerce 2.4
+   * @Info : https://www.clicshopping.org/forum/trademark/
+   *
+   */
 
   use ClicShopping\OM\Registry;
   use ClicShopping\OM\HTTP;
   use ClicShopping\OM\CLICSHOPPING;
 
-  class ht_favicon {
+  class ht_favicon
+  {
     public $code;
     public $group;
     public $title;
@@ -21,36 +22,41 @@
     public $sort_order;
     public $enabled = false;
 
-    public function __construct() {
+    public function __construct()
+    {
       $this->code = get_class($this);
       $this->group = basename(__DIR__);
 
       $this->title = CLICSHOPPING::getDef('module_header_tags_favicon_title');
       $this->description = CLICSHOPPING::getDef('module_header_tags_favicon_description');
 
-      if ( defined('MODULE_HEADER_TAGS_FAVICON_STATUS') ) {
+      if (defined('MODULE_HEADER_TAGS_FAVICON_STATUS')) {
         $this->sort_order = MODULE_HEADER_TAGS_FAVICON_SORT_ORDER;
         $this->enabled = (MODULE_HEADER_TAGS_FAVICON_STATUS == 'True');
       }
     }
 
-    public function execute() {
+    public function execute()
+    {
 
       $CLICSHOPPING_Template = Registry::get('Template');
 
       $extension_favicon = MODULE_HEADER_TAGS_FAVICON_EXTENSION_FAVICON;
-      $CLICSHOPPING_Template->addBlock('<link rel="icon" type="image/' . $extension_favicon . '" href="'. HTTP::getShopUrlDomain() . 'sources/images/icons/favicon.' . $extension_favicon . '">', $this->group);
+      $CLICSHOPPING_Template->addBlock('<link rel="icon" type="image/' . $extension_favicon . '" href="' . HTTP::getShopUrlDomain() . 'sources/images/icons/favicon.' . $extension_favicon . '">', $this->group);
     }
 
-    public function isEnabled() {
+    public function isEnabled()
+    {
       return $this->enabled;
     }
 
-    public function check() {
+    public function check()
+    {
       return defined('MODULE_HEADER_TAGS_FAVICON_STATUS');
     }
 
-    public function install() {
+    public function install()
+    {
       $CLICSHOPPING_Db = Registry::get('Db');
 
       $CLICSHOPPING_Db->save('configuration', [
@@ -91,17 +97,19 @@
 
 
       return $CLICSHOPPING_Db->save('configuration', ['configuration_value' => '1'],
-                                               ['configuration_key' => 'WEBSITE_MODULE_INSTALLED']
-                            );
+        ['configuration_key' => 'WEBSITE_MODULE_INSTALLED']
+      );
     }
 
-    public function remove() {
+    public function remove()
+    {
       return Registry::get('Db')->exec('delete from :table_configuration where configuration_key in ("' . implode('", "', $this->keys()) . '")');
     }
 
-    public function keys() {
+    public function keys()
+    {
       return array('MODULE_HEADER_TAGS_FAVICON_STATUS',
-                   'MODULE_HEADER_TAGS_FAVICON_EXTENSION_FAVICON',
-                   'MODULE_HEADER_TAGS_FAVICON_SORT_ORDER');
+        'MODULE_HEADER_TAGS_FAVICON_EXTENSION_FAVICON',
+        'MODULE_HEADER_TAGS_FAVICON_SORT_ORDER');
     }
   }
