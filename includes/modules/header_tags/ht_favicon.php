@@ -42,7 +42,7 @@
       $CLICSHOPPING_Template = Registry::get('Template');
 
       $extension_favicon = MODULE_HEADER_TAGS_FAVICON_EXTENSION_FAVICON;
-      $CLICSHOPPING_Template->addBlock('<link rel="icon" type="image/' . $extension_favicon . '" href="' . HTTP::getShopUrlDomain() . 'sources/images/icons/favicon.' . $extension_favicon . '">', $this->group);
+      $CLICSHOPPING_Template->addBlock('<link rel="shortcut icon" type="image/' . $extension_favicon . '" href="' . HTTP::getShopUrlDomain() . 'sources/images/icons/favicon.' . $extension_favicon . '">', $this->group);
     }
 
     public function isEnabled()
